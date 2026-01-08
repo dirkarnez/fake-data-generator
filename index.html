@@ -38,10 +38,6 @@
         registeredAt: faker.date.past(),
       };
     }
-    
-    export const users = faker.helpers.multiple(createRandomUser, {
-      count: 5,
-    });
 
     if (window.Worker) {
       const excelWorker = new Worker("excel-worker.js");
@@ -60,7 +56,12 @@
           aHref.click();
         }
       });
-      excelWorker.postMessage([first.value, second.value]);
+      excelWorker.postMessage({
+        type: "export",
+        value: faker.helpers.multiple(createRandomUser, {
+          count: 5,
+        })
+      });
     }
 
   </script>
