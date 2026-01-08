@@ -8,7 +8,7 @@ self.onmessage = function(e) {
     // Use XLSX methods in the worker
     const wb = XLSX.utils.book_new();
 
-    e.data.value.forEach((name, data) => {
+    e.data.value.forEach(({ name, data }) => {
       const ws = XLSX.utils.json_to_sheet(data);
        XLSX.utils.book_append_sheet(wb, ws, name);
     });
