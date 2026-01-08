@@ -9,6 +9,7 @@
 <body>
   <a href="https://github.com/dirkarnez/fake-data-generator" target="_blank">dirkarnez/fake-data-generator</a><br>
   <div id="container"></div>
+  <button id="btn-generate">Generate</button>
   <script>
     const div = document.getElementById("container");
     const log = (...data) => div.innerHTML += `${data.join(String.fromCharCode(0x20))}<br>`;
@@ -27,17 +28,6 @@
   
   <script type="module">
     import { faker } from '@faker-js/faker';
-    export function createRandomUser() {
-      return {
-        userId: faker.string.uuid(),
-        username: faker.internet.username(),
-        email: faker.internet.email(),
-        avatar: faker.image.avatar(),
-        password: faker.internet.password(),
-        birthdate: faker.date.birthdate(),
-        registeredAt: faker.date.past(),
-      };
-    }
 
     if (window.Worker) {
       const excelWorker = new Worker("excel-worker.js");
@@ -56,11 +46,21 @@
           aHref.click();
         }
       });
-      excelWorker.postMessage({
-        type: "export",
-        value: faker.helpers.multiple(createRandomUser, {
-          count: 5,
-        })
+
+      document.getElementById("btn-generate").addEventListener('click', function(e) {
+        excelWorker.postMessage({
+          type: "export",
+          value: faker.helpers.multiple({
+            userId: faker.string.uuid(),
+            username: faker.internet.username(),
+            email: faker.internet.email(),
+            avatar: faker.image.avatar(),
+            password: faker.internet.password(),
+            birthdate: faker.date.birthdate(),
+            registeredAt: faker.date.past(),
+          }, {
+            count: 5,
+          })
       });
     }
 
