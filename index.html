@@ -17,6 +17,14 @@
     error(1,2,3);
   </script>
 
+  <script type="importmap">
+  	{
+  		"imports": {
+  			"@faker-js/faker": "https://cdn.jsdelivr.net/npm/@faker-js/faker@10.2.0/+esm"
+  		}
+  	}
+  </script>
+  
   <script type="module">
     import { faker } from '@faker-js/faker';
     export function createRandomUser() {
