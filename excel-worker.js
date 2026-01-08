@@ -1,8 +1,11 @@
+// https://cdn.sheetjs.com/xlsx-0.20.3/package/types/index.d.ts
+/** @type {import("./types/xlsx/index.d.ts")} */
+const XLSX = globalThis.XLSX;
+
 importScripts("https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/shim.min.js");
 importScripts("https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js");
 
-// const XLSX = globalThis.XLSX;
-// debugger;
+
 self.onmessage = function(e) {
   if (e.data.type === "export") {
     // Use XLSX methods in the worker
