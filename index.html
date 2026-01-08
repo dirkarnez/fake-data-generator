@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <a href="https://github.com/dirkarnez/playground" target="_blank">dirkarnez/playground</a><br>
+  <div id="container"></div>
+  <script>
+    const div = document.getElementById("container");
+    const log = (...data) => div.innerHTML += `${data.join(String.fromCharCode(0x20))}<br>`;
+    const error = (...data) => div.innerHTML += `<span style="color: red">${data.join(String.fromCharCode(0x20))}<span><br>`;
+    log(1,2,3);
+    error(1,2,3);
+  </script>
+</body>
+</html>
