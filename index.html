@@ -16,5 +16,24 @@
     log(1,2,3);
     error(1,2,3);
   </script>
+
+  <script type="module">
+    import { faker } from '@faker-js/faker';
+    export function createRandomUser() {
+      return {
+        userId: faker.string.uuid(),
+        username: faker.internet.username(),
+        email: faker.internet.email(),
+        avatar: faker.image.avatar(),
+        password: faker.internet.password(),
+        birthdate: faker.date.birthdate(),
+        registeredAt: faker.date.past(),
+      };
+    }
+    
+    export const users = faker.helpers.multiple(createRandomUser, {
+      count: 5,
+    });
+  </script>
 </body>
 </html>
