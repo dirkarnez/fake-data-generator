@@ -34,6 +34,27 @@
     export const users = faker.helpers.multiple(createRandomUser, {
       count: 5,
     });
+
+    if (window.Worker) {
+      const excelWorker = new Worker("excel-worker.js");
+      excelWorker.addEventListener('message', function(e) {
+        // postMessage({type: "export", value: u8 });
+        if(e && e.data && e.data.type == "export") {
+          e.stopPropagation();
+          e.preventDefault();
+          const data = e.data.value;
+          const blob = new Blob([data], {type:"application/octet-stream"});
+          const url = URL.createObjectURL(blob);
+          const aHref = document.createElement("a");
+          aHref.download = "SheetJSXPort.xlsx";
+          aHref.href = url;
+          document.body.appendChild(aHref);
+          aHref.click();
+        }
+      });
+      excelWorker.postMessage([first.value, second.value]);
+    }
+
   </script>
 </body>
 </html>
