@@ -50,7 +50,7 @@
       document.getElementById("btn-generate").addEventListener('click', function(e) {
         excelWorker.postMessage({
           type: "export",
-          value: faker.helpers.multiple({
+          value: () => faker.helpers.multiple({
             userId: faker.string.uuid(),
             username: faker.internet.username(),
             email: faker.internet.email(),
